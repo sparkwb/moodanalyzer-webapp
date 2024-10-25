@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Quiz Analyzer</title>
+    <link rel="icon" href="https://i.ibb.co/fSYf6LH/web.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('background.jpg'); /* Local image file */
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 1.5em;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .quiz-container h2 {
+            margin-bottom: 1em;
+            color: #333;
+            font-size: 1.5em;
+        }
+        .question {
+            margin-bottom: 1.5em;
+        }
+        .question h3 {
+            margin-bottom: 0.5em;
+            color: #007bff;
+            font-size: 1.2em;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+        }
+        .options label {
+            margin-bottom: 0.5em;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .options label:hover {
+            background-color: #e9ecef;
+        }
+        .submit-btn, .retry-btn, .home-btn {
+            margin-top: 1em;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover, .retry-btn:hover, .home-btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            display: none;
+            margin-top: 1em;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+        .result img {
+            width: 50px;
+            height: 50px;
+            margin-top: 10px;
+        }
+        .footer {
+            margin-top: 1em;
+            font-size: 1em;
+            color: #333;
+            text-align: center;
+        }
+        @media (min-width: 600px) {
+            .quiz-container {
+                padding: 2em;
+            }
+            .quiz-container h2 {
+                font-size: 1.8em;
+            }
+            .question h3 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Mood Quiz Analyzer</h2>
+        
+        <div class="question">
+            <h3>1. How did you feel when you woke up today?</h3>
+            <div class="options">
+                <label><input type="radio" name="q1" value="happy"> Happy</label>
+                <label><input type="radio" name="q1" value="sad"> Sad</label>
+                <label><input type="radio" name="q1" value="neutral"> Neutral</label>
+                <label><input type="radio" name="q1" value="anxious"> Anxious</label>
+                <label><input type="radio" name="q1" value="excited"> Excited</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>2. How is your energy level right now?</h3>
+            <div class="options">
+                <label><input type="radio" name="q2" value="high"> High</label>
+                <label><input type="radio" name="q2" value="medium"> Medium</label>
+                <label><input type="radio" name="q2" value="low"> Low</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>3. How sociable do you feel today?</h3>
+            <div class="options">
+                <label><input type="radio" name="q3" value="very"> Very sociable</label>
+                <label><input type="radio" name="q3" value="somewhat"> Somewhat sociable</label>
+                <label><input type="radio" name="q3" value="not"> Not sociable at all</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>4. How has your appetite been today?</h3>
+            <div class="options">
+                <label><input type="radio" name="q4" value="good"> Good</label>
+                <label><input type="radio" name="q4" value="average"> Average</label>
+                <label><input type="radio" name="q4" value="poor"> Poor</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>5. How well did you sleep last night?</h3>
+            <div class="options">
+                <label><input type="radio" name="q5" value="well"> Very well</label>
+                <label><input type="radio" name="q5" value="okay"> Okay</label>
+                <label><input type="radio" name="q5" value="poorly"> Poorly</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>6. How stressed do you feel right now?</h3>
+            <div class="options">
+                <label><input type="radio" name="q6" value="not"> Not stressed at all</label>
+                <label><input type="radio" name="q6" value="somewhat"> Somewhat stressed</label>
+                <label><input type="radio" name="q6" value="very"> Very stressed</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>7. How productive have you been today?</h3>
+            <div class="options">
+                <label><input type="radio" name="q7" value="very"> Very productive</label>
+                <label><input type="radio" name="q7" value="somewhat"> Somewhat productive</label>
+                <label><input type="radio" name="q7" value="not"> Not productive at all</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>8. How much have you exercised today?</h3>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a lot"> A lot</label>
+                <label><input type="radio" name="q8" value="some"> Some</label>
+                <label><input type="radio" name="q8" value="none"> None</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>9. How often have you laughed today?</h3>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a lot"> A lot</label>
+                <label><input type="radio" name="q9" value="some"> Some</label>
+                <label><input type="radio" name="q9" value="none"> None</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>10. How well are you coping with current events?</h3>
+            <div class="options">
+                <label><input type="radio" name="q10" value="well"> Very well</label>
+                <label><input type="radio" name="q10" value="okay"> Okay</label>
+                <label><input type="radio" name="q10" value="not well"> Not well</label>
+            </div>
+        </div>
+
+        <button class="submit-btn">Submit</button>
+        <div class="result">
+            <img src="" alt="Mood Emoji" class="result-emoji">
+            <p class="result-text"></p>
+            <button class="retry-btn" onclick="location.reload();">Use it Again</button>
+            <button class="home-btn" onclick="window.location.href='https://kevinspark.rf.gd/webapps.html';">Go Back to Home</button>
+            <p class="footer">MADE WITH LOVE ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.submit-btn').addEventListener('click', () => {
+            const responses = {
+                q1: document.querySelector('input[name="q1"]:checked')?.value,
+                q2: document.querySelector('input[name="q2"]:checked')?.value,
+                q3: document.querySelector('input[name="q3"]:checked')?.value,
+                q4: document.querySelector('input[name="q4"]:checked')?.value,
+                q5: document.querySelector('input[name="q5"]:checked')?.value,
+                q6: document.querySelector('input[name="q6"]:checked')?.value,
+                q7: document.querySelector('input[name="q7"]:checked')?.value,
+                q8: document.querySelector('input[name="q8"]:checked')?.value,
+                q9: document.querySelector('input[name="q9"]:checked')?.value,
+                q10: document.querySelector('input[name="q10"]:checked')?.value,
+            };
+
+            let mood = 'neutral';
+            let happyScore = 0;
+            let sadScore = 0;
+
+            if (responses.q1 === 'happy') happyScore++;
+            if (responses.q1 === 'sad') sadScore++;
+            if (responses.q1 === 'anxious') sadScore++;
+            if (responses.q1 === 'excited') happyScore++;
+
+            if (responses.q2 === 'high') happyScore++;
+            if (responses.q2 === 'low') sadScore++;
+
+            if (responses.q3 === 'very') happyScore++;
+            if (responses.q3 === 'not') sadScore++;
+
+            if (responses.q4 === 'good') happyScore++;
+            if (responses.q4 === 'poor') sadScore++;
+
+            if (responses.q5 === 'well') happyScore++;
+            if (responses.q5 === 'poorly') sadScore++;
+
+            if (responses.q6 === 'not') happyScore++;
+            if (responses.q6 === 'very') sadScore++;
+
+            if (responses.q7 === 'very') happyScore++;
+            if (responses.q7 === 'not') sadScore++;
+
+            if (responses.q8 === 'a lot') happyScore++;
+            if (responses.q8 === 'none') sadScore++;
+
+            if (responses.q9 === 'a lot') happyScore++;
+            if (responses.q9 === 'none') sadScore++;
+
+            if (responses.q10 === 'well') happyScore++;
+            if (responses.q10 === 'not well') sadScore++;
+
+            if (happyScore > sadScore) mood = 'happy';
+            if (sadScore > happyScore) mood = 'sad';
+            if (responses.q1 === 'anxious' || responses.q6 === 'very') mood = 'anxious';
+
+            const detailedReview = {
+                happy: "You seem to be in a great mood! Keep spreading the positivity.",
+                sad: "It looks like you're feeling a bit down. It's okay to have off days. Take care of yourself!",
+                neutral: "You're feeling pretty neutral today. It's a balanced state.",
+                anxious: "You seem to be feeling anxious. Try some relaxation techniques or talk to someone you trust."
+            };
+
+            const emojis = {
+                happy: "https://emojipedia-us.s3.amazonaws.com/source/skype/289/smiling-face-with-smiling-eyes_1f60a.png",
+                sad: "https://emojipedia-us.s3.amazonaws.com/source/skype/289/crying-face_1f622.png",
+                neutral: "https://emojipedia-us.s3.amazonaws.com/source/skype/289/neutral-face_1f610.png",
+                anxious: "https://em-content.zobj.net/thumbs/160/apple/285/anxious-face-with-sweat_1f630.png"
+            };
+
+            const resultElement = document.querySelector('.result');
+            const resultText = document.querySelector('.result-text');
+            const resultEmoji = document.querySelector('.result-emoji');
+
+            resultEmoji.src = emojis[mood];
+            resultText.textContent = `Your mood is: ${mood}. ${detailedReview[mood]}`;
+            resultElement.style.display = 'block';
+
+            // Hide the questions and show the result
+            document.querySelectorAll('.question, .submit-btn').forEach(element => {
+                element.style.display = 'none';
+            });
+
+            // Scroll to the top of the container to display the result
+            document.querySelector('.quiz-container').scrollTop = 0;
+        });
+    </script>
+</body>
+</html>
